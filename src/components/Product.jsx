@@ -1,17 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Button } from "semantic-ui-react";
+import ProductList from "./ProductList";
 // destructure single product property and call them respectively
 // props is immutable, while a child can read its properties, it cant modify them
 // a child does not own its props, the parent owns props, react supports
 // one-way data flow
-const Product = ({id, title, description, votes, userUrl, itemUrl, handleProductUpvote}) => {
+const Product = ({id, title, description, votes, userUrl, itemUrl, handleVote}) => {
 
     // create afunction that calls the new prop-function
-    const handleUpVote = () => {
-        this.handleProductUpvote.onVote(this.props.id)
-        this.handleUpVote = this.handleUpVote.bind(this);
-
-
+    const [vote, setVote] = useState(0);
+  
+    const[data, setData] = useState({
+        title:"",
+        description: "",
+        votes: "",
+        userUrl:"",
+        itemUrl:""
+    })
+    
+    const handleChange = (e) => {
+        setData({...setData(data), [e.target.id]: e.target.value});
     }
+    
+    useEffect(() => {
+        fetch(`http://localhost:3000/products/${id}`)
+        .then((resp) => resp.json())
+        .then((data) => {
+            setData(data)
+        })
+        handleVote()
+        .catch((err) => console.log(err));
+
+    },[id, handleVote])
+    
+   
+        
     return (
         <div className="item">
             <div className="image">
@@ -19,8 +42,10 @@ const Product = ({id, title, description, votes, userUrl, itemUrl, handleProduct
             </div>
             <div className="middle align content">
                 <div className="header">
-                    <img onClick={this.handleUpVote.bind(this.handleProductUpvote)} src="./images/caret.png" alt=""/>
-                    {votes}
+                <span><h5 value={votes} onChange={handleChange} count={ProductList}>{votes}</h5></span>
+                    <Button  onClick={() => setVote(vote + 1)}>Vote</Button>
+                    {/* <img  src="./images/caret.png" alt=""/> */}
+                   
                     
                 </div>
                 <div className="description">

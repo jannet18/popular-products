@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Product from "./Product";
+import { useParams } from "react-router-dom";
+
 
 // get products array
 // map through to get single product
 const ProductList = () => {
     const [products, setProducts] = useState([]);
-
-    this.handleProductUpvote=this.handleProductUpvote
-
-
-    useEffect(() => {
+      const {id} = useParams();
+   
+     useEffect(() => {
 
         fetch("http://localhost:3000/products")
         .then((resp) => resp.json())
@@ -20,17 +20,24 @@ const ProductList = () => {
         })
 
         .catch((error) => console.error(error))
-        
-      
-        
 
     }, [])
 // pass the function as a prop
-    const handleProductUpvote = (productId) => {
-        this.handleProductUpvote.bind(this)
-        console.log(productId + 'was upvoted.')
 
-    } 
+function handleVote ({data,setData}) {
+    fetch(`http://localhost:3000/products/${id}`, {
+        method: 'PATCH',
+        headers:{
+            'Content-type': 'application/json'
+        },
+        body:JSON.stringify(data)
+    })
+    .then((resp) => resp.json())
+    .then(data => {
+        console.log(data)
+        setData(data)
+    })
+}
 
     return(
         <div className="ui unstackable items">
@@ -47,7 +54,8 @@ const ProductList = () => {
                 votes={product?.votes}
                 userUrl={product?.userUrl}
                 itemUrl={product?.itemUrl}
-                onVote={this.handleProductUpvote}
+                count={handleVote}
+              
                 
                 />
            

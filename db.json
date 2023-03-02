@@ -20,7 +20,7 @@
         "id": 3,
         "title": "Decker Dustbuster",
         "description": "Portable dustbuster.",
-        "votes": "0",
+        "votes": 0,
         "userUrl": "./images/user-icon.png",
         "itemUrl": "./image/item4.jpg"
     },
@@ -28,7 +28,7 @@
         "id": 4,
         "title": "Boose Stand",
         "description": "Beautiful boose holder.",
-        "votes": "0",
+        "votes": 0,
         "userUrl": "./images/user-icon.png",
         "itemUrl": "./images/item5.jpg"
     },
@@ -36,7 +36,7 @@
         "id": 5,
         "title": "Bird Feeder",
         "description": "A waterproof phone pouch, crate cover, squirrel-proof bird feeder.",
-        "votes": "0",
+        "votes": 0,
         "userUrl": "./images/user-icon.png",
         "itemUrl": "./images/item6.jpg"
     },
